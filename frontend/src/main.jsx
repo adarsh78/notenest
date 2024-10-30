@@ -4,11 +4,14 @@ import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from "react-router-dom";
 import "react-toastify/ReactToastify.css";
+import TodoContextProvider from './Context/TodoContextProvider.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
+    <TodoContextProvider>
     <App />
+    </TodoContextProvider>
     </BrowserRouter>
   </StrictMode>,
 )

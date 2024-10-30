@@ -1,55 +1,116 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { handleSuccess } from '../toastMessage.js';
+import React, { useContext, useEffect, useState } from "react";
+import Navbar from "../Components/Navbar.jsx";
+import { TodoContext } from "../Context/TodoContextProvider.jsx";
+import { MdEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 
 const Home = () => {
 
-    const navigate = useNavigate();
+  const { todos, createTodo, deleteTodo } = useContext(TodoContext);
 
-    const [todos, setTodos] = useState([]);
-    const [loggedInUser, setLoggedInUser] = useState("")
+  console.log("Todos are: ", todos);
 
-    useEffect(() => {
-        setLoggedInUser(localStorage.getItem("loggedInUser"))
-    }, []);
+  const [isInputOpen, setIsInputOpen] = useState(false);
 
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("loggedInUser");
-        setTimeout(() => {
-            navigate("/login");
-        }, 1000);
-        handleSuccess("User logged out successfully");
-    }
+  const handleInputBoxOpen = () => {
+    setIsInputOpen(true);
+  };
 
-    const fetchTodos = async () => {
-        try {
-            const url = "http://localhost:3010/todos";
-            const response = await fetch(url, {
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`,
-                }
-            });
+  const handleInputBoxClose = () => {
+    setIsInputOpen(false);
+  };
 
-            const result = await response.json();
-            setTodos(result.data);
+  const [newTodo, setNewTodo] = useState({
+    title: "",
+    description: "",
+  });
 
-        } catch (error) {
-            console.log(`Error fetching the todos: ${error.message}`)
-        }
-    }
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    const copyNewTodo = {...newTodo};
+    copyNewTodo[name] = value;
+    setNewTodo(copyNewTodo);
+  }
 
-    console.log("Todos are: ", todos);
+  const handleAddTodo = (e) => {
+    e.preventDefault();
+    createTodo(newTodo);
+    setNewTodo({
+        title: "",
+        description: ""
+    });
+    setIsInputOpen(false);
+  }
 
-    useEffect(() => {
-        fetchTodos();
-    }, [])
   return (
     <>
-    <h1>welcome {loggedInUser}</h1>
-    <button onClick={handleLogout}>Logout</button>
-    </>
-  )
-}
+      <Navbar />
 
-export default Home
+      <div>
+        {!isInputOpen && (
+          <div
+            onClick={handleInputBoxOpen}
+            className="w-[30rem] mx-auto border-[1px] border-zinc-700 rounded-md mt-3 p-2 cursor-pointer"
+          >
+            <span>Take a note...</span>
+          </div>
+        )}
+
+        {isInputOpen && (
+          <div className="w-[30rem] mx-auto border-[1px] border-zinc-700 rounded-md mt-3 p-2 cursor-pointer flex flex-col gap-2">
+            <input
+              className="p-1 text-xl focus:outline-none"
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Title"
+              aria-label="title"
+              value={newTodo.title}
+              onChange={handleInputChange}
+            />
+
+            <input
+              className="px-1 focus:outline-none"
+              type="text"
+              name="description"
+              id="description"
+              placeholder="Take a note..."
+              aria-label="description"
+              value={newTodo.description}
+              onChange={handleInputChange}
+            />
+
+            <button onClick={handleAddTodo} className="flex justify-end">Add</button>
+            <button onClick={handleInputBoxClose} className="flex justify-end">
+              Close
+            </button>
+          </div>
+        )}
+      </div>
+
+      <div className="w-[1300px] mx-auto mt-4 flex gap-3 justify-center flex-wrap py-2">
+        {todos.length > 0 &&
+          todos.map((todo) => (
+            <div
+              className="bg-gray-500 w-[20%] px-4 py-2 rounded-md"
+              key={todo._id}
+            >
+              <div className="">
+                <h3 className="text-xl mb-2">{todo.title}</h3>
+                <p>{todo.description}</p>
+                <div className="flex gap-2 justify-end items-end">
+                <MdEdit size={22}/>
+                <MdDelete 
+                size={22}
+                onClick={() => deleteTodo(todo._id)}
+                />
+                </div>
+              </div>
+            </div>
+          ))}
+      </div>
+    </>
+  );
+};
+
+export default Home;

@@ -19,7 +19,7 @@ const Login = () => {
         setLoginInfo(copyLoginInfo);
     }
 
-    const handleSignUpSubmit = async (e) => {
+    const handleLoginSubmit = async (e) => {
         e.preventDefault();
 
         const { email, password } = loginInfo;
@@ -39,7 +39,7 @@ const Login = () => {
             });
 
             const result = await response.json();
-            console.log(result)
+            // console.log(result)
             const { message, success, error, name, jwtToken } = result;
             if(success){
                 handleSuccess(message);
@@ -71,13 +71,14 @@ const Login = () => {
             <span className='text-xl font-medium'>NoteNest</span>
         </div>
         <h1 className='text-3xl font-medium text-center mb-5'>Login</h1>
-            <form onSubmit={handleSignUpSubmit}>
+            <form onSubmit={handleLoginSubmit}>
                 <div className='flex flex-col gap-2 mt-3'>
                 <label htmlFor="email">Email</label>
                 <input 
-                className='bg-green-200 rounded-md border-[1px] border-zinc-400 px-3 pt-1 pb-2'
+                className='bg-green-200 rounded-md border-[1px] border-zinc-400 px-3 pt-1 pb-2 focus:outline-none'
                 type="email" 
                 name="email" 
+                id='email'
                 placeholder='your@email.com' 
                 value={loginInfo.email}
                 onChange={handleChange}
@@ -87,9 +88,10 @@ const Login = () => {
                 <div className='flex flex-col gap-2 mt-3'>
                 <label htmlFor="password">Password</label>
                 <input 
-                className='bg-green-200 rounded-md border-[1px] border-zinc-400 px-3 pt-1 pb-2'
+                className='bg-green-200 rounded-md border-[1px] border-zinc-400 px-3 pt-1 pb-2 focus:outline-none'
                 type="password" 
                 name="password" 
+                id='password'
                 placeholder='your password' 
                 value={loginInfo.password}
                 onChange={handleChange}

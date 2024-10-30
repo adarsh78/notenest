@@ -76,9 +76,10 @@ const SignUp = () => {
                 <div className='flex flex-col gap-2'>
                 <label htmlFor="name">Full Name</label>
                 <input 
-                className='bg-green-200 rounded-md border-[1px] border-zinc-400 px-3 pt-1 pb-2'
+                className='bg-green-200 rounded-md border-[1px] border-zinc-400 px-3 pt-1 pb-2 focus:outline-none'
                 type="text" 
                 name="name" 
+                id='name'
                 placeholder='John Snow' 
                 value={signUpInfo.name}
                 onChange={handleChange}
@@ -88,9 +89,10 @@ const SignUp = () => {
                 <div className='flex flex-col gap-2 mt-3'>
                 <label htmlFor="email">Email</label>
                 <input 
-                className='bg-green-200 rounded-md border-[1px] border-zinc-400 px-3 pt-1 pb-2'
+                className='bg-green-200 rounded-md border-[1px] border-zinc-400 px-3 pt-1 pb-2 focus:outline-none'
                 type="email" 
                 name="email" 
+                id='email'
                 placeholder='your@email.com' 
                 value={signUpInfo.email}
                 onChange={handleChange}
@@ -100,9 +102,10 @@ const SignUp = () => {
                 <div className='flex flex-col gap-2 mt-3'>
                 <label htmlFor="password">Password</label>
                 <input 
-                className='bg-green-200 rounded-md border-[1px] border-zinc-400 px-3 pt-1 pb-2'
+                className='bg-green-200 rounded-md border-[1px] border-zinc-400 px-3 pt-1 pb-2 focus:outline-none'
                 type="password" 
                 name="password" 
+                id='password'
                 placeholder='your password' 
                 value={signUpInfo.password}
                 onChange={handleChange}
