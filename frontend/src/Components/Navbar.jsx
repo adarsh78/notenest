@@ -1,8 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { PiNotepadFill } from 'react-icons/pi'
 import { useNavigate } from 'react-router-dom';
+import { handleSuccess } from "../toastMessage.js";
+import { MdDarkMode } from "react-icons/md";
+import { MdLightMode } from "react-icons/md";
+import { MdLogout } from "react-icons/md";
+import { ThemeContext } from '../Context/ThemeContextProvider.jsx';
 
-const Navbar = () => {
+const Navbar = ({ isAuthenticated }) => {
 
     const [loggedInUser, setLoggedInUser] = useState("");
     const navigate = useNavigate();
@@ -18,7 +23,10 @@ const Navbar = () => {
             navigate("/login");
         }, 1000);
         handleSuccess("User logged out successfully");
+        window.location.reload();
     }
+
+    const { handleDarkMode, handleLightMode, darkTheme } = useContext(ThemeContext);
 
 
   return (
@@ -26,13 +34,25 @@ const Navbar = () => {
    <div className='flex gap-3 bg-zinc-500 py-3 px-6 items-center justify-between'>
     <div className='flex gap-3 items-center'>
    <PiNotepadFill size={40}/>
-   <div>NoteNest</div>
+   <div>Note Nest</div>
     </div>
    <div className='flex items-center gap-1 justify-end flex-col'>
-   <span>Hello, {loggedInUser}</span>
+    {isAuthenticated && (
+        <span>Hello, {loggedInUser}</span>
+    )}
+   
    <div className='flex items-center gap-3'>
-   <button>Mode</button>
-   <button onClick={handleLogout}>Logout</button>
+    {darkTheme ? (
+        <button onClick={handleLightMode}><MdLightMode size={20}/></button>
+    ) : (
+        <button onClick={handleDarkMode}><MdDarkMode size={20}/></button>
+    )}
+    {
+        isAuthenticated && (
+            <button onClick={handleLogout}><MdLogout /></button>
+        )
+    }
+   
    </div>
    </div>
    </div>

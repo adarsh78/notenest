@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import Navbar from "../Components/Navbar.jsx";
+import React, { useContext, useState } from "react";
 import { TodoContext } from "../Context/TodoContextProvider.jsx";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
@@ -44,7 +43,6 @@ const Home = () => {
 
   return (
     <>
-      <Navbar />
 
       <div>
         {!isInputOpen && (

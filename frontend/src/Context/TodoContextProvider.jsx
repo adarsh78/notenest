@@ -79,8 +79,10 @@ const TodoContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchTodos();
-  }, []);
+    if(localStorage.getItem("token")){
+      fetchTodos();
+    }
+  }, [localStorage.getItem("token")]);
 
   return (
     <TodoContext.Provider value={{ todos, createTodo, deleteTodo }}>
