@@ -29,8 +29,8 @@ const Login = () => {
         }
 
         try {
-            // const url = "https://notenest-lrdk9tc0k-adarsh78s-projects.vercel.app/auth/login";
-            const url = "http://localhost:3010/auth/login"
+            const url = "https://notenest-api.vercel.app/auth/login";
+            // const url = "http://localhost:3010/auth/login"
 
             const response = await fetch(url, {
                 method: "POST",
