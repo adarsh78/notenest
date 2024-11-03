@@ -72,7 +72,7 @@ const SignUp = () => {
     <div className={`${darkTheme ? "bg-zinc-800 text-zinc-300" : "bg-zinc-300 text-zinc-800"} w-[20rem] rounded-md py-6 px-8 shadow-[0_35px_60px_-15px_rgba(20,40,40,0.8)]`}>
         <div className='flex items-center gap-2'>
             <PiNotepadFill size={40}/>
-            <span className='text-xl font-medium'>NoteNest</span>
+            <span className='text-xl font-medium'>Note Nest</span>
         </div>
         <h1 className='text-3xl font-medium text-center mb-5'>Sign up</h1>
             <form onSubmit={handleSignUpSubmit}>

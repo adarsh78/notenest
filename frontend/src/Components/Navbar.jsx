@@ -6,6 +6,7 @@ import { MdDarkMode } from "react-icons/md";
 import { MdLightMode } from "react-icons/md";
 import { MdLogout } from "react-icons/md";
 import { ThemeContext } from '../Context/ThemeContextProvider.jsx';
+import { ToastContainer } from 'react-toastify';
 
 const Navbar = ({ isAuthenticated }) => {
 
@@ -23,7 +24,9 @@ const Navbar = ({ isAuthenticated }) => {
             navigate("/login");
         }, 1000);
         handleSuccess("User logged out successfully");
-        window.location.reload();
+        setTimeout(() => {
+            window.location.reload();      
+        }, 800);
     }
 
     const { handleDarkMode, handleLightMode, darkTheme } = useContext(ThemeContext);
@@ -56,6 +59,7 @@ const Navbar = ({ isAuthenticated }) => {
    </div>
    </div>
    </div>
+   <ToastContainer />
    </>
   )
 }

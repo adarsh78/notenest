@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import { handleSuccess } from "../toastMessage";
 
 export const TodoContext = createContext();
 
@@ -68,7 +69,8 @@ const TodoContextProvider = ({ children }) => {
         if(response.ok){
             console.log(result);
             const todosAfterOneDeletion = todos.filter((todo) => todo._id !== todoId )
-            setTodos(todosAfterOneDeletion)
+            setTodos(todosAfterOneDeletion);
+            handleSuccess("Todo Trashed");
         }
         else {
             console.log(`Error: ${result.message}`);

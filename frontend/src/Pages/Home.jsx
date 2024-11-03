@@ -2,6 +2,9 @@ import React, { useContext, useState } from "react";
 import { TodoContext } from "../Context/TodoContextProvider.jsx";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import { ThemeContext } from "../Context/ThemeContextProvider.jsx";
+import { handleError, handleSuccess } from "../toastMessage.js";
+import { ToastContainer } from "react-toastify";
 
 const Home = () => {
 
@@ -33,13 +36,21 @@ const Home = () => {
 
   const handleAddTodo = (e) => {
     e.preventDefault();
-    createTodo(newTodo);
-    setNewTodo({
-        title: "",
-        description: ""
-    });
-    setIsInputOpen(false);
+    if(newTodo.title || newTodo.description){
+      createTodo(newTodo);
+      setNewTodo({
+          title: "",
+          description: ""
+      });
+      handleSuccess("New note added");
+      setIsInputOpen(false);
+    }
+    else{
+      handleError("Please enter a note");
+    } 
   }
+
+  const { darkTheme } = useContext(ThemeContext);
 
   return (
     <>
@@ -48,16 +59,16 @@ const Home = () => {
         {!isInputOpen && (
           <div
             onClick={handleInputBoxOpen}
-            className="w-[30rem] mx-auto border-[1px] border-zinc-700 rounded-md mt-3 p-2 cursor-pointer"
+            className={`${darkTheme ? "border-zinc-200 border-[0.5px] shadow-xl" : "border-zinc-700 shadow-[0_1px_20px_-7px_rgba(20,40,40,0.8)]"} w-[30rem] mx-auto border-zinc-700 rounded-md mt-3 p-2 cursor-pointer`}
           >
-            <span>Take a note...</span>
+            <span className={`${darkTheme ? "text-zinc-200" : "text-zinc-700"}`}>Take a note...</span>
           </div>
         )}
 
         {isInputOpen && (
-          <div className="w-[30rem] mx-auto border-[1px] border-zinc-700 rounded-md mt-3 p-2 cursor-pointer flex flex-col gap-2">
+          <div className={`${darkTheme ? "border-zinc-200 border-[0.5px] shadow-xl" : "border-zinc-700 shadow-[0_1px_20px_-7px_rgba(20,40,40,0.8)]"} w-[30rem] mx-auto rounded-md mt-3 p-2 cursor-pointer flex flex-col gap-2`}>
             <input
-              className="p-1 text-xl focus:outline-none"
+              className="p-1 text-xl focus:outline-none bg-transparent"
               type="text"
               name="title"
               id="title"
@@ -68,7 +79,7 @@ const Home = () => {
             />
 
             <input
-              className="px-1 focus:outline-none"
+              className="px-1 focus:outline-none bg-transparent"
               type="text"
               name="description"
               id="description"
@@ -78,8 +89,8 @@ const Home = () => {
               onChange={handleInputChange}
             />
 
-            <button onClick={handleAddTodo} className="flex justify-end">Add</button>
-            <button onClick={handleInputBoxClose} className="flex justify-end">
+            <button onClick={handleAddTodo} className={`${darkTheme ? "text-zinc-200" : "text-zinc-700"} flex justify-end mr-3`}>Add</button>
+            <button onClick={handleInputBoxClose} className={`${darkTheme ? "text-zinc-200" : "text-zinc-700"} flex justify-end mr-3`}>
               Close
             </button>
           </div>
@@ -107,6 +118,7 @@ const Home = () => {
             </div>
           ))}
       </div>
+      <ToastContainer />
     </>
   );
 };
