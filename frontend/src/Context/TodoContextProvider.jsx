@@ -58,7 +58,7 @@ const TodoContextProvider = ({ children }) => {
   const deleteTodo = async (todoId) => {
     try {
       const url = `https://notenest-api.vercel.app/todos/${todoId};
-        // const url = `http://localhost:3010/todos/${todoId}`
+       
         const response = await fetch(url, {
             method: "DELETE",
             headers: {
