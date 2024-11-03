@@ -14,15 +14,6 @@ dotenv.config();
 app.use(bodyParser.json());
 app.use(cors());
 
-
-// const corsOptions = {
-//     origin: "https://notenest-client.vercel.app", // Replace with your client URL
-//     methods: ["GET", "POST", "PUT", "DELETE"], // HTTP methods allowed
-//     credentials: true // Set to true if using cookies or authorization headers
-// };
-
-// app.use(cors(corsOptions));
-
 const PORT = process.env.PORT || 3010;
 
 app.get("/", (req, res) => {

@@ -62,9 +62,9 @@ const Login = () => {
         } catch (error) {
             handleError(error)
         }
-        // setTimeout(() => {
-        //     window.location.reload();
-        // }, 800);
+        setTimeout(() => {
+            window.location.reload();
+        }, 800);
     }
 
     const { darkTheme } = useContext(ThemeContext);
