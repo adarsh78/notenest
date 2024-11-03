@@ -13,8 +13,8 @@ const TodoContextProvider = ({ children }) => {
       const response = await fetch(url, {
         method: "POST",
         headers: {
-          "content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify(newTodo),
       });
@@ -37,7 +37,7 @@ const TodoContextProvider = ({ children }) => {
       // const url = "http://localhost:3010/todos";
       const response = await fetch(url, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
       });
 
@@ -62,8 +62,8 @@ const TodoContextProvider = ({ children }) => {
         const response = await fetch(url, {
             method: "DELETE",
             headers: {
-                "content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
               }
         });
 
