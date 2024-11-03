@@ -31,7 +31,7 @@ const SignUp = () => {
         }
 
         try {
-            const url = "http://localhost:3010/auth/signup";
+            const url = "https://notenest-lrdk9tc0k-adarsh78s-projects.vercel.app/auth/signup";
 
             const response = await fetch(url, {
                 method: "POST",
