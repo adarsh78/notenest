@@ -9,6 +9,7 @@ const TodoContextProvider = ({ children }) => {
   const createTodo = async (newTodo) => {
     try {
       const url = "https://notenest-lrdk9tc0k-adarsh78s-projects.vercel.app/todos";
+      // const url = "http://localhost:3010/todos";
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -33,6 +34,7 @@ const TodoContextProvider = ({ children }) => {
   const fetchTodos = async () => {
     try {
       const url = "https://notenest-lrdk9tc0k-adarsh78s-projects.vercel.app/todos";
+      // const url = "http://localhost:3010/todos";
       const response = await fetch(url, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -55,7 +57,8 @@ const TodoContextProvider = ({ children }) => {
 
   const deleteTodo = async (todoId) => {
     try {
-        const url = `https://notenest-lrdk9tc0k-adarsh78s-projects.vercel.app/todos/${todoId}`
+      const url = `https://notenest-lrdk9tc0k-adarsh78s-projects.vercel.app/todos/${todoId}`;
+        // const url = `http://localhost:3010/todos/${todoId}`
         const response = await fetch(url, {
             method: "DELETE",
             headers: {
