@@ -14,8 +14,7 @@ const TodoContextProvider = ({ children }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // "Authorization": `Bearer ${localStorage.getItem("token")}`,
-          "Authorization": localStorage.getItem("token"),
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify(newTodo),
       });
@@ -58,14 +57,13 @@ const TodoContextProvider = ({ children }) => {
 
   const deleteTodo = async (todoId) => {
     try {
-      const url = `https://notenest-api.vercel.app/todos/${todoId};
-       
+      const url = `https://notenest-api.vercel.app/todos/${todoId}`;
         const response = await fetch(url, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${localStorage.getItem("token")}`,
-              }
+              },
         });
 
         const result = await response.json();
