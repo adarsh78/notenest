@@ -72,7 +72,7 @@ const TodoContextProvider = ({ children }) => {
             console.log(result);
             const todosAfterOneDeletion = todos.filter((todo) => todo._id !== todoId )
             setTodos(todosAfterOneDeletion);
-            handleSuccess("Todo Trashed");
+            handleSuccess("Note Trashed");
         }
         else {
             console.log(`Error: ${result.message}`);
