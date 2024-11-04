@@ -32,7 +32,7 @@ A full-stack Notes application (Google Keep Clone) built with the MERN stack (Mo
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/notes-app.git
+   git clone https://github.com/adarsh78/notenest.git
    cd notenest
    ```
 
