@@ -57,6 +57,7 @@ const Navbar = ({ isAuthenticated }) => {
           <PiNotepadFill size={40} />
           <div>Note Nest</div>
         </div>
+        {isAuthenticated && (
         <div className="flex">
           {!isSearchOpen && (
             <IoIosSearch
@@ -91,7 +92,9 @@ const Navbar = ({ isAuthenticated }) => {
             </div>
           )}
         </div>
+        )}
 
+        {isAuthenticated && (
         <div className="bg-zinc-900 mx-auto hidden md:block lg:block p-3 rounded-xl mr-10">
           <input
             className="focus:outline-none bg-transparent text-zinc-200"
@@ -108,6 +111,8 @@ const Navbar = ({ isAuthenticated }) => {
             />
           )}
         </div>
+        )}
+
         <div className="flex items-center gap-1 justify-end flex-col">
           {isAuthenticated && <span>Hello, {loggedInUser}</span>}
 
