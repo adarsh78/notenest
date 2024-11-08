@@ -8,9 +8,9 @@ import { ToastContainer } from "react-toastify";
 
 const Home = () => {
 
-  const { todos, createTodo, deleteTodo, updateTodo } = useContext(TodoContext);
+  const { todos, filteredTodo, createTodo, deleteTodo, updateTodo } = useContext(TodoContext);
 
-  console.log("Todos are: ", todos);
+  // console.log("Todos are: ", todos);
 
   const [isInputOpen, setIsInputOpen] = useState(false);
 
@@ -52,10 +52,11 @@ const Home = () => {
 
   const { darkTheme } = useContext(ThemeContext);
 
+
   return (
     <>
 
-      <div>
+      <div className="mt-7">
         {!isInputOpen && (
           <div
             onClick={handleInputBoxOpen}
@@ -97,8 +98,8 @@ const Home = () => {
         )}
       </div>
       <div className="w-[20rem] md:w-[800px] lg:w-[1200px] mx-auto mt-4 flex gap-3 justify-center flex-wrap py-2">
-        {todos.length > 0 &&
-          todos.map((todo) => (
+        {filteredTodo.length > 0 &&
+          filteredTodo.map((todo) => (
             <div
               className={`${darkTheme ? "border-[0.5px] border-zinc-200" : "border-[0.5px] border-zinc-700"} w-[100%] md:w-[50%] lg:w-[20%] px-4 bg-transparent py-2 rounded-md`}
               key={todo._id}

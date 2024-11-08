@@ -5,6 +5,8 @@ export const TodoContext = createContext();
 
 const TodoContextProvider = ({ children }) => {
   const [todos, setTodos] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredTodo, setFilteredTodo] = useState([]);
 
   const createTodo = async (newTodo) => {
     try {
@@ -14,7 +16,7 @@ const TodoContextProvider = ({ children }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify(newTodo),
       });
@@ -37,7 +39,7 @@ const TodoContextProvider = ({ children }) => {
       // const url = "http://localhost:3010/todos";
       const response = await fetch(url, {
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
 
@@ -58,38 +60,52 @@ const TodoContextProvider = ({ children }) => {
   const deleteTodo = async (todoId) => {
     try {
       const url = `https://notenest-api.vercel.app/todos/${todoId}`;
-        const response = await fetch(url, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("token")}`,
-              },
-        });
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
 
-        const result = await response.json();
+      const result = await response.json();
 
-        if(response.ok){
-            console.log(result);
-            const todosAfterOneDeletion = todos.filter((todo) => todo._id !== todoId )
-            setTodos(todosAfterOneDeletion);
-            handleSuccess("Note Trashed");
-        }
-        else {
-            console.log(`Error: ${result.message}`);
-        }
+      if (response.ok) {
+        console.log(result);
+        const todosAfterOneDeletion = todos.filter(
+          (todo) => todo._id !== todoId
+        );
+        setTodos(todosAfterOneDeletion);
+        handleSuccess("Note Trashed");
+      } else {
+        console.log(`Error: ${result.message}`);
+      }
     } catch (error) {
-        console.log(`Error in deleting a todo: ${error.message}`);
+      console.log(`Error in deleting a todo: ${error.message}`);
     }
   };
 
   useEffect(() => {
-    if(localStorage.getItem("token")){
+    if (localStorage.getItem("token")) {
       fetchTodos();
     }
   }, [localStorage.getItem("token")]);
 
+
+  useEffect(() => {
+    setFilteredTodo(
+      searchQuery
+        ? todos.filter((todo) =>
+            todo.title.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+        : todos
+    );
+  }, [todos, searchQuery]);
+
   return (
-    <TodoContext.Provider value={{ todos, createTodo, deleteTodo }}>
+    <TodoContext.Provider
+      value={{ todos, createTodo, deleteTodo, searchQuery, setSearchQuery, filteredTodo }}
+    >
       {children}
     </TodoContext.Provider>
   );
