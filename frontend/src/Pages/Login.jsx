@@ -69,6 +69,11 @@ const Login = () => {
 
     const { darkTheme } = useContext(ThemeContext);
 
+    const handleNavigateToForgotPassword = () => {
+        navigate("/forgot-password");
+        window.location.reload(); 
+    }
+
   return (
     <>
     <div className='flex items-center justify-center min-h-[76vh]'>
@@ -105,7 +110,7 @@ const Login = () => {
                 />
                 </div>
                 <p 
-                onClick={() => navigate("/forgot-password")}
+                onClick={handleNavigateToForgotPassword}
                 className={`${darkTheme ? "text-zinc-300" : "text-zinc-800"} text-[13px] cursor-pointer hover:underline flex justify-end`}
                 >Forgot Password?</p>
 

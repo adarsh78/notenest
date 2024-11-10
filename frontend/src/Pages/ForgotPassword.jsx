@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { ThemeContext } from "../Context/ThemeContextProvider";
-import { handleError, handleSuccess } from "../toastMessage";
+import { handleError, handleSuccess } from "../toastMessage.js";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -24,10 +24,12 @@ const ForgotPassword = () => {
 
       const data = await response.json();
       handleSuccess(data.message);
+      console.log(data);
     } catch (error) {
       console.error(`Error occurred: ${error}`);
       handleError(error.message);
     }
+    setEmail("")
   };
 
   return (

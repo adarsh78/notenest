@@ -65,8 +65,8 @@ const Navbar = ({ isAuthenticated }) => {
         <div className="flex">
           {!isSearchOpen && (
             <IoIosSearch
-              className="mr-[4rem] cursor-pointer block md:hidden lg:hidden"
-              size={25}
+              className="mr-[4rem] mt-1 cursor-pointer block md:hidden lg:hidden"
+              size={20}
               onClick={() => setIsSearchOpen(true)}
             />
           )}
