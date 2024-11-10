@@ -6,6 +6,8 @@ import Home from './Pages/Home';
 import RefreshHandler from './Components/RefreshHandler';
 import Navbar from './Components/Navbar';
 import { ThemeContext } from './Context/ThemeContextProvider';
+import ForgotPassword from './Pages/ForgotPassword';
+import ResetPassword from './Pages/ResetPassword';
 
 const App = () => {
 
@@ -31,6 +33,8 @@ const App = () => {
       <Route path='/signup' element={<SignUp />}/>
       <Route path='/login' element={<Login />}/>
       <Route path='/home' element={<ProtectedRoute element={<Home />}/>}/>
+      <Route path='/forgot-password' element={<ForgotPassword />}/>
+      <Route path='reset-password/:token' element={<ResetPassword />}/>
     </Routes>
     </div>
     </>

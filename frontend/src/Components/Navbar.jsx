@@ -54,7 +54,11 @@ const Navbar = ({ isAuthenticated }) => {
     <>
       <div className="flex bg-zinc-500 py-3 px-6 items-center justify-between">
         <div className="flex gap-3 items-center">
-          <PiNotepadFill size={40} />
+          <PiNotepadFill 
+          onClick={() => navigate("/login")}
+          size={40} 
+          className="cursor-pointer"
+          />
           <div>Note Nest</div>
         </div>
         {isAuthenticated && (

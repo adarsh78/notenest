@@ -104,6 +104,10 @@ const Login = () => {
                 onChange={handleChange}
                 />
                 </div>
+                <p 
+                onClick={() => navigate("/forgot-password")}
+                className={`${darkTheme ? "text-zinc-300" : "text-zinc-800"} text-[13px] cursor-pointer hover:underline flex justify-end`}
+                >Forgot Password?</p>
 
                 <button className={`${darkTheme ? "bg-zinc-300 hover:bg-white text-zinc-900" : "bg-zinc-700 hover:bg-zinc-800 text-zinc-200"} w-[100%] my-6 rounded-md p-2 font-medium`}>Login</button>
                 <p className='text-sm text-center'>Don't have an account?{" "}

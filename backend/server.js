@@ -6,6 +6,7 @@ import { connectDB } from "./Config/dbConnect.js";
 
 import AuthRoutes from "./Routes/auth.route.js";
 import TodoRoutes from "./Routes/todo.route.js";
+import PasswordRecoveryRoutes from "./Routes/forgotPassword.route.js";
 
 connectDB();
 const app = express();
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
 
 app.use("/auth", AuthRoutes);
 app.use("/todos", TodoRoutes);
+app.use("/password-recovery", PasswordRecoveryRoutes);
 
 app.listen(PORT, () => {
     console.log(`App started running at Port: http://localhost:${PORT}`)
